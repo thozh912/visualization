@@ -1,32 +1,6 @@
----
-title: "Lab report 1"
-author: "Thomas Zhang"
-date: "2016 M08 30"
-output: pdf_document
----
-
-##Assignment 1
-
-OK, I opened the `cars93` data file in package `MASS`. Then I executed code snippet
-
-```{r,eval=FALSE,message=FALSE,warning=FALSE}
-library(MASS)
-df1=aggregate(Price~Type, data=Cars93, FUN=mean)
-barplot(df1$Price, names.arg=df1$Type)
-```
-
-and I enhanced the resulting bar chart using inkscape. The final product looks like this:
-
-
-![](firstplotmodified.png)
-
-I believe it looks very nice.
-
-##Assignment 2
-
-Next, we read U.S. hospital data on `SENIC.csv` and split the variables into qualitative and quantitative variables and produce nice bar charts and boxplots,respectively, using package `ggplot2`.
-
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
+## library(MASS)
+## df1=aggregate(Price~Type, data=Cars93, FUN=mean)
+## barplot(df1$Price, names.arg=df1$Type)
 library(ggplot2)
 library(fANCOVA)
 library(gridExtra)
@@ -79,31 +53,9 @@ listquantplots <- list(quantplots1,quantplots2,quantplots3,quantplots4,quantplot
                        quantplots9,quantplots10,quantplots11)
 grobquantplot <- arrangeGrob(grobs = listquantplots, nrow = 3)
 
-```
-
-As we can see, most U.S. hospitals do not have a medical school affiliation.
-
-```{r,echo = FALSE,fig.width=10,fig.height=15}
 plot(grobquantplot)
-```
-
-The interesting question here is whether we have correlations in outliers between the boxplots. A quick check indicates that so may be the case. For instance, Hospital id numbers 47, 53 and 104 all have top ten positions in variables length of stay, age and infeciton risk.
-
-##Assigment 3
-
-Keeping with data set `SENIC.csv`, we write a code that finds out in which hospital the ratio “Number of nurses/Number of
-beds” is the lowest. This ratio tells us how well staffed the nurses at the hospital are relative to number of hospital beds. The code looks like this:
-
-```{r,eval=FALSE}
-senicdata <- cbind(senicdata, senicdata$X10 / senicdata$X6)
-sort(senicdata[,13],index.return = TRUE)$ix
-```
-
-The hospital id 107 is the least well staffed hospital of the lot.
-
-Now we make a scatterplot over infection risk against hospital identification number. We also mark the least well staffed hospital in the scatterplot.
-
-```{r,echo=FALSE}
+## senicdata <- cbind(senicdata, senicdata$X10 / senicdata$X6)
+## sort(senicdata[,13],index.return = TRUE)$ix
 senicdata <- cbind(senicdata, senicdata$X10 / senicdata$X6)
 #sort(senicdata[,13],index.return = TRUE)$ix
 #this shows how well staffed the nurses are relative to no of beds
@@ -115,13 +67,6 @@ scatterpl <- ggplot(data = senicdata, aes(Obs,X3) ) + geom_point(aes(colour = id
   scale_color_manual(labels = c("Lowest nurse/bed ratio", "Not lowest ratio"), values = c("red", "blue")) +
   theme_bw()
 scatterpl
-```
-
-It seems as if the least well staffed hospital has one of the lowest infection risks, according to the data. It could be the case that nurses are good infectious disease vectors.
-
-Finally, we plot the predicted values of a smoother for the scatterplot and its 95% pointwise confidence band.
-
-```{r,echo=FALSE}
 mod=loess.as(senicdata$Obs, senicdata$X3, criterion="gcv", degree=2,
              plot=FALSE)
 result=predict(mod, se=TRUE)
@@ -133,12 +78,4 @@ newframe <-cbind(senicdata, data.frame(Obs = senicdata$Obs, fitted = result$fit,
 scatterpl <- scatterpl + geom_line(data = newframe, mapping = aes(Obs,fitted)) +
   geom_ribbon(data = newframe,mapping = aes(ymin = lower,ymax = upper),alpha=0.3)
 scatterpl
-```
-
-It would appear as if a horizontal line could fit inside the band. It could mean that the Infection risk is not correlated with hospital identification number.
-
-##Appendix
-
-###R code
-```{r code=readLines(knitr::purl("C:/Users/Dator/Documents/R_HW/visualization/Thomas_Zhang_Lab1.Rmd", documentation = 0)), eval = FALSE}
-
+## 
