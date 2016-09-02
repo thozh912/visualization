@@ -36,7 +36,7 @@ grid.raster(img)
 
 # Assignment2
 
-Data set `SENIC.csv` describes the results of measurements taken at different US hospitals. It contains a random sample of $n=113$, the ID number and 11 other variables.
+Data set `SENIC.csv` describes the results of measurements taken at different US hospitals. It contains a random sample of $n=113$ (observations), the ID number and 11 other variables.
 
 Then, split the variables into qualitative and quantitative variables and produce nice bar charts and boxplots, respectively, using package `ggplot2`.
 
@@ -181,7 +181,7 @@ It would appear as if a horizontal line could fit inside the band. It could mean
 # Appendix
 
 ## Contribution
-.... 
+All group members have contributed to this report with either code, text, or plots. The results are discussed together and then combined some text and code from the individual report. Graphs are compared and selected the best one to present in this report.
 
 ## R Code
 ```{r code=readLines(knitr::purl('group5_lab1.Rmd', documentation = 1)), eval = FALSE}
