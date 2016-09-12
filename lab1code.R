@@ -7,7 +7,7 @@ barplot(df1$Price, names.arg=df1$Type)
 
 
 senicdata <- read.csv2("SENIC.csv")
-head(senicdata)
+#head(senicdata)
 #X7 and X8 are the qualitative variables
 qualplots1 <- ggplot(senicdata, aes(x = factor(X7))) + geom_bar(fill = "cyan", width = 0.3) + xlab("Medical School Affiliation") +
 ggtitle("Medical school affiliation of hospitals") + scale_x_discrete(labels = c("YES","NO"))
@@ -22,7 +22,7 @@ senicquants$Obs <- rep(113,113)
 senicquants$Obs <- as.factor(senicquants$Obs)
 
 
-quantplots1 <- ggplot(senicquants) + geom_boxplot(aes(x = Obs, y = X1)) + ggtitle("avg. Length of Stays in days") +
+quantplots1 <- ggplot(senicquants) + geom_boxplot(aes(x = Obs, y = X1),width = 0.3) + ggtitle("avg. Length of Stays in days") +
 ylab("Days") + xlab("No. of observations")
 quantplots2 <- ggplot(senicquants) + geom_boxplot(aes(x = Obs, y = X2)) + ggtitle("avg. Age of patients in years") +
   ylab("Years") + xlab("No. of observations")
