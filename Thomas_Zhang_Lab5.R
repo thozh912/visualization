@@ -24,15 +24,13 @@ plot(olive_dend)
 threeclusters <- cutree(olive_dend, k = 3)
 olive$three <- as.factor(threeclusters)
 #write.csv(olive,file = "oliveout.csv")
-
 wb = loadWorkbook("Oilcoal.xls")
 oilcoaldata <- readWorksheet(wb, sheet = 1, header = TRUE)
 oilcoaldata$Year <- as.numeric(oilcoaldata$Year)
-hehe <- gvisMotionChart(oilcoaldata,
-                        idvar='Country', timevar='Year',
-                        sizevar = "Marker.size")
-plot(hehe)
-
+#hehe <- gvisMotionChart(oilcoaldata,
+#                        idvar='Country', timevar='Year',
+#                        sizevar = "Marker.size")
+#plot(hehe)
 oilp <- 100 * (oilcoaldata$Oil / (oilcoaldata$Oil + oilcoaldata$Coal))
 preds <- cbind(oilcoaldata$Year,as.factor(oilcoaldata$Country))
 thinplate <- Tps(preds,oilp)
@@ -49,6 +47,4 @@ thinplate <- Tps(preds,oilp)
 #}, video.name = "C:\\Users\\Dator\\Documents\\R_HW\\visualization\\anime.mp4",
 #interval = 0.05,ani.width = 800,ani.height = 600
 #)
-
-
-
+## NA
